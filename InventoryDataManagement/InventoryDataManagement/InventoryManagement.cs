@@ -11,32 +11,27 @@ namespace InventoryDataManagement
 {
     public class InventoryManagement
     {
-        public void ReadData(string filepaath)
+        public void ReadData(string filepath)
         {
             try
             {
-                using (StreamReader streamReder = new StreamReader(filepaath))
+                using (StreamReader reader = new StreamReader(filepath))
                 {
-                    var json =streamReder.ReadToEnd();
-                    var item = JsonConvert.JsonSerializer.Serialize< List < Inventory >> (json);
-                    var options = new JsonSerializerOptions { WriteIndented = true };
-                    string jsonString = JsonSerializer.Serialize(InventoryManagement, options);
-
-                    Console.WriteLine(jsonString);
+                    var json = reader.ReadToEnd();
+                    var items = JsonConvert.DeserializeObject<List<Inventory>>(json);
                     Console.WriteLine("Name\t" + "Price\t" + "Weight\t" + "Total amount");
-                    foreach (var data in item)
+                    foreach (var data in items)
                     {
                         Console.WriteLine(data.Name + "\t" + data.Price + "\t" + data.Weight + "\t" + data.Price * data.Weight);
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-            
-        }
+
     }
+    
 }

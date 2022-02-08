@@ -10,6 +10,9 @@ namespace InventoryDataManagement
     {
         static void Main(string[] args)
         {
+            String filepath = @"F:\Bridgelabz\InventoryDataMangement\InventoryDataManagement\InventoryDataManagement\Inventory.json";
+            InventoryManagement inventoryManagement = new InventoryManagement();
+            inventoryManagement.ReadData(filepath);
         }
     }
 }
